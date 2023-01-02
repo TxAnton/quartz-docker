@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  quartz:
+    ports:
+    - "1313:1313"
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: quartz
+    env_file:
+      - hugo.env
+    volumes:
+      - ./quartz:/go/quartz
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "250m"
+        max-file: "2"
+    restart: unless-stopped
